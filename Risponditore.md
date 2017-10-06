@@ -1,5 +1,5 @@
 # risponditore automatico in Java
-Usando Sokect TCP si realizzi, mediante un automa a stati finiti, un risponditore automatico. Si progetti in UML la macchina a stati finiti utilizzando l'opportuno diagramma: ogni stato è una risposta ogni transizione costituisce la domanda che porta alla risposta; la conversazione dovrà iniziare e terminare in modo opportuno (transizione); il risponditore risponde citando il nome del cliente ad ogni risposta; possono essere serviti più clienti (ad ogni cliente un thread o usando tecnica del pooling). I file da consegnare sono i seguenti:
+Usando Sokect TCP si realizzi, mediante un automa a stati finiti, un risponditore automatico. Si progetti in UML la macchina a stati finiti utilizzando l'opportuno diagramma: ogni stato è una domanda (server), ogni transizione costituisce la risposta (client) che porta alla successiva domanda; la conversazione dovrà iniziare e terminare in modo opportuno (transizione); il risponditore risponde citando il nome del cliente ad ogni risposta; possono essere serviti più clienti (ad ogni cliente un thread o usando tecnica del pooling). I file da consegnare sono i seguenti:
 ```
 README.md
 Pizzeria.java
@@ -13,4 +13,4 @@ Risponditore
 
 ## Valutazione
 
-La sufficienza è garantita ad un progetto che garantisca tutte le specifiche di cui sopra; i voti di eccellenza (dal 7 in su) per gli apporti creativi del programmatore.
+La sufficienza è garantita ad un progetto che rispetti tutte le specifiche di cui sopra; i voti di eccellenza (dal 7 in su) per gli apporti creativi del programmatore.
