@@ -1,4 +1,4 @@
-# risponditore automatico in Java
+# Risponditore automatico in Java
 Usando Sokect TCP si realizzi, mediante un automa a stati finiti, un risponditore automatico. Si progetti in UML la macchina a stati finiti utilizzando l'opportuno diagramma: ogni stato è una domanda (server), ogni transizione costituisce la risposta (client) che porta alla successiva domanda; la conversazione dovrà iniziare e terminare in modo opportuno (transizione); il risponditore risponde citando il nome del cliente ad ogni risposta; possono essere serviti più clienti (ad ogni cliente un thread o usando tecnica del pooling). I file da consegnare sono i seguenti:
 ```
 README.md
