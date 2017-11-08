@@ -1,1 +1,0 @@
-Consegna del risponditore.
