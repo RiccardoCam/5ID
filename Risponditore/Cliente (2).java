@@ -25,24 +25,20 @@ public class Cliente {
         String serverAddress = "127.0.0.1";
         String userInput;
 
-        
-        // Make connection and initialize streams
         Socket socket = new Socket(serverAddress, 9898);
-        // in = new BufferedReader(new InputStreamReader(System.in));
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
         stdIn = new BufferedReader(new InputStreamReader(System.in));
         
-        System.out.println(in.readLine()); //welcome
-        out.println(stdIn.readLine()); //name
+        System.out.println(in.readLine()); 
+        out.println(stdIn.readLine()); 
         
         do {
             System.out.println(in.readLine());
             System.out.println(in.readLine());
             userInput = stdIn.readLine();
             out.println(userInput);
-        } while (!userInput.equals("End"));
-        //System.out.println(in.readLine());
+        } while (!userInput.equals("Fine"));
     }
 
     public static void main(String[] args) throws IOException {

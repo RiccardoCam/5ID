@@ -25,24 +25,24 @@ public class Server {
     private static Graph grafo = new Graph();
     
      public static void main(String[] args) throws Exception {
-     System.out.println("Negozio start...");
+     System.out.println("Il ristorante è aperto!");
 
         
         grafo = server.Negozio.inizializeGraph();
         try (ServerSocket listener = new ServerSocket(9898)) {
             while (true) {
                 // crea il thread e lo lancia
-                new Commesso(listener.accept()).start();
+                new Cameriere(listener.accept()).start();
             }
         }
      }
      
-     private static class Commesso extends Thread {
+     private static class Cameriere extends Thread {
 
         private final Socket socket;
         private String clientName;
 
-        public Commesso(Socket socket) {
+        public Cameriere(Socket socket) {
             this.socket = socket;
         }
 
@@ -58,37 +58,39 @@ public class Server {
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 out = new PrintWriter(socket.getOutputStream(), true);
 
-                out.println("Buongiorno , come si chiama?");
+                out.println("Buona sera, come si chiama?");
                 clientName = in.readLine();
                 ArrayList adj = null;
                 double weight = 0;
+//                out.println("Buona sera " + clientName + ", cosa desidera? " + costoTotale);
                 while (!currentNode.equals("fine")) {
                     outStrm = "";
-                    out.println("Buonasera " + clientName + ", cosa desidera? " + costoTotale);
+//                    out.println("Desidera altro? " + "(" + costoTotale + ")");
+                    out.println("Buona sera " + clientName + ", cosa desidera? " + costoTotale);
                     try {
                         adj = grafo.getAdjList(currentNode);
-                        outStrm += "*** - ";
+                        outStrm += "   ";
                         for (Object x : adj) {
                             Edge app = (Edge) x;
                             weight = grafo.getEdgeWeight(currentNode, app.getDest());
                             costoTotale+=weight;
                             if (weight > 0) {
-                                outStrm += app.getDest() + " € --> " + weight;
+                                outStrm += app.getDest() + " ---> " + weight + "€";
                             } else {
-                                outStrm += app.getDest() +  " <> ";
+                                outStrm += app.getDest() +  " *** ";
                             }
                         }
-                        outStrm+=" - ***";
+                        outStrm+="   ";
                         out.println(outStrm);
                         succ = in.readLine().toLowerCase();
                         currentNode = succ;
                     } catch (GraphException e) {
-                        out.println("Articolo inesistente!:(");
+                        out.println("Errore opzione inesistente! Riprovare");
                         currentNode = in.readLine();
                     }
                 }
             } catch (IOException e) {
-                myLog("Error handling client# " + clientName + ": " + e);
+                myLog("Errore " + clientName + ": " + e);
             } finally {
                 out.println("Arrivederci e grazie!");
                 try {
@@ -96,7 +98,7 @@ public class Server {
                 } catch (IOException e) {
 
                 }
-                myLog("Connection with client# " + clientName + " closed");
+                myLog("Connessioe col cliente " + clientName + " è chiusa");
             }
 
         }
