@@ -1,9 +1,5 @@
-Io creato il risponditore automatico di una possibile banca, per creare il
-server ho utilizzato un ThreadPoolExecutor, ho preferito usare questo tipo
-di soluzione perchè esso permette di eseguire più attività usando uno dei
- suoi thread.
-Ho utlizzato un database sqlite per salvare le credenziali degli utenti.
-Per creare il grafo ho utilizzato un mio progetto che crea un grafo e
-salva le infomazioni sia dei Nodi che degli archi in due arrayList.
-Ho salvato le domande come informazioni dei nodi e le possibili risposte
-giuste negli archi.
+Ho creator il risponditore automatico di una banca, ho uitlizzato la tecnica
+del ThreadPoolExcecutor così da avviare più attività utilizzando un dei suoi thread collegati.
+Pre creare il grafo ho utilizzato un mio progatto che memorizza i nodi e gli archi all'interno di due arraylis, le domande sono salvate come
+informazioni dei nodi mentre le possibili risposte nell'arco.
+inoltre ho utilizzato un database sqlite per salvare le credenzili degli utenti 
