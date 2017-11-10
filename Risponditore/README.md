@@ -1,4 +1,4 @@
-#Risponditore
+﻿# Risponditore
 L'esercizio del risponditore è stato realizzato con l'utilizzo di tre classi
 * Server
 * Mercato
