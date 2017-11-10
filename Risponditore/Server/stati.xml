@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FSM>
+    <state id="START">
+        <transition input=".*" patternParametri="" next="CHIEDI_NOME" />
+    </state>
+    <state id="CHIEDI_NOME">
+        <transition input=".*" patternParametri="Mi chiamo" next="SALVA_NOME" />
+    </state>
+    <state id="SALVA_NOME">
+        <transition input=".*" patternParametri="" next="ATTESA" />
+    </state>
+    <state id="MESSAGGIO_BENVENUTO">
+        <transition input=".*" patternParametri="" next="ATTESA"/>
+    </state>
+    <state id="ATTESA">
+        <transition input="^(chi è|cos'è)\s.*$" patternParametri="^(chi è|cos'è)\s" next="RICERCA_WIKIPEDIA" />
+        <transition input="^(che tempo fa(rà)?|qual è il meteo)(( oggi)|( domani))?\s.*$" patternParametri="^(che tempo fa(rà)?|qual è il meteo)\s" next="METEO" />
+        <transition input="(come ti chiami|qual è il tuo nome).*" patternParametri="" next="MIO_NOME"/>
+        <transition input="cosa sai fare.*" patternParametri="" next="MESSAGGIO_BENVENUTO"/>
+        <transition input="(ciao|buongiorno|buonasera|salve|buonanotte).*" patternParametri="" next="SALUTO"/>
+        <transition input="spegniti.*" patternParametri="" next="SPEGNI"/>
+    </state>
+    <state id="RICERCA_WIKIPEDIA">
+        <transition input=".*" patternParametri="" next="ATTESA"/>
+    </state>
+    <state id="METEO">
+        <transition input=".*" patternParametri="" next="ATTESA"/>
+    </state>
+    <state id="MIO_NOME">
+        <transition input=".*" patternParametri="" next="ATTESA"/>
+    </state>
+    <state id="SALUTO">
+        <transition input=".*" patternParametri="" next="ATTESA"/>
+    </state>
+    <state id="SPEGNI">
+        <transition input=".*" patternParametri="" next="END" />
+     </state>
+    <state id="END" action="end">
+    </state>
+
+</FSM>
