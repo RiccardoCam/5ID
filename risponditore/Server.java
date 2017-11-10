@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,21 +13,6 @@ public class Server {
         this.server = s;
     }
 
-    protected boolean isStopped = false;
-
-    private boolean isStopped() {
-        return this.isStopped;
-    }
-
-    public void stop() {
-        this.isStopped = true;
-        
-        try {
-            this.server.close();
-        } catch (IOException e) {
-            throw new RuntimeException("Error closing server", e);
-        }
-    }
 
     public static void main(String[] args) throws IOException {
         System.out.println("The server is running...");
@@ -40,25 +23,20 @@ public class Server {
         
         Server server = new Server(socket);
         
-        while (!server.isStopped) {
+        while (true) {
             
             Socket client;
             try {
                 
                 client = socket.accept();
             } catch (IOException e) {
-                if (server.isStopped()) {
-                    System.out.println("Server Stopped.");
-                    break;
-                }
                 throw new RuntimeException("Error accepting client connection", e);
             }
             
             
             threadPool.execute(new Car(client));
         }
-        threadPool.shutdown();
-        System.out.println("Server Stopped.");
+        
     }
 }
 
