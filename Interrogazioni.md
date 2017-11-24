@@ -1,8 +1,8 @@
 # Programmazione interrogazioni primo trimestre
 
-- Mar 18/11
+- Mar 28/11
 	Boldrin, Carraro, Lu, Zoccarato
-- Ven 01/17
+- Ven 01/12
 	Bigetti, Martorel
 - Mar 05/12
 	Modolo, Pavanello, Scarparo, Vanzan
