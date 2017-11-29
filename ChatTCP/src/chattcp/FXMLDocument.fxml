@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="544.0" prefWidth="581.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chattcp.FXMLDocumentController">
+    <children>
+      <Label id="utenteConnesso" fx:id="utenteConnesso" layoutX="188.0" layoutY="23.0" minHeight="16" minWidth="69">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+        <Label layoutX="67.0" layoutY="22.0" minHeight="16" minWidth="69" text="Utente: ">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="messaggio" layoutX="65.0" layoutY="494.0" prefHeight="27.0" prefWidth="354.0" />
+      <Button layoutX="436.0" layoutY="494.0" mnemonicParsing="false" onAction="#inviaMessaggio" prefHeight="27.0" prefWidth="59.0" text="Invio" />
+      <Button layoutX="394.0" layoutY="17.0" mnemonicParsing="false" onAction="#disconnetti" prefHeight="29.0" prefWidth="101.0" text="Disconnetti">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label fx:id="destinatario" layoutX="67.0" layoutY="53.0" minHeight="16" minWidth="69" text="Destinatario: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbox" layoutX="188.0" layoutY="54.0" onAction="#setUserDest" onShowing="#getUtentiConnessi" prefHeight="27.0" prefWidth="164.0" />
+      <ScrollPane fx:id="scrollPane" layoutX="40.0" layoutY="91.0" prefHeight="392.0" prefWidth="478.0">
+         <content>
+            <VBox fx:id="containerMessaggi" prefHeight="390.0" prefWidth="447.0" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="394.0" layoutY="53.0" mnemonicParsing="false" onAction="#aggiorna" prefHeight="29.0" prefWidth="101.0" text="Aggiorna">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
