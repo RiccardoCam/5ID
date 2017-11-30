@@ -36,14 +36,14 @@ public class SocketThread extends Thread {
         this.server = server;
         this.clientSocket = clientSocket;
         //try {
-            //dbMessages.executeQuery("DELETE FROM Messages");
+        //dbMessages.executeQuery("DELETE FROM Messages");
         //} catch (SQLException ex) {
-            //setMessage(ex.getMessage());
+        //setMessage(ex.getMessage());
         //}
 
     }
 
-    public String getData(){
+    public String getData() {
         try {
             semaforo.acquire();
         } catch (InterruptedException ex) {
@@ -51,15 +51,15 @@ public class SocketThread extends Thread {
         }
         return msgOut;
     }
-    
-    private void setMessage(String nuovo){
+
+    private void setMessage(String nuovo) {
         msgOut = nuovo;
         semaforo.release();
     }
-    
+
     @Override
     public void run() {
-       setMessage("The server is running...");
+        setMessage("The server is running...");
         try {
             refreshUsersOnline();
             handleCmd();
@@ -108,8 +108,7 @@ public class SocketThread extends Thread {
                         signUp(st);
                     } else if ("msg".equalsIgnoreCase(cmd)) {
                         handleMessage(st);
-                    } else if ("getchat".equalsIgnoreCase(cmd)) {
-                        getChat(st);
+
                     } else {
                         setMessage("unknown " + cmd);
                     }
@@ -123,24 +122,7 @@ public class SocketThread extends Thread {
         }
 
     }
-    
-    public void getChat(StringTokenizer st) {
-        String sender = st.nextToken();
-        String receiver = st.nextToken();
-        ResultSet rs;
-        String msgOut = "";
-        try {
-            rs = dbMessages.executeQuery("SELECT * from Messages WHERE Sender = '" + sender + "' AND Receiver = '" + receiver + "' OR "
-                    + "Sender = '" + receiver + "' AND Receiver = '" + sender + "'");
-            while (rs.next()) {
-                msgOut+= rs.getString("Sender") + " " + rs.getString("Receiver") + " " + rs.getString("Msg") + " § ";
-            }
 
-            pw.println("chat "+msgOut.trim());
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     private void handleMessage(StringTokenizer st) throws IOException {
         String receiver = st.nextToken();
@@ -153,12 +135,12 @@ public class SocketThread extends Thread {
         for (SocketThread socket : socketList) {
             if (receiver.equalsIgnoreCase(socket.getMyUsername())) {
                 String outMsg = "msg " + myUsername + " " + message;
-                //socket.send(outMsg);
+                socket.send(outMsg);
             }
         }
         setMessage("New message from " + myUsername + " to " + receiver + " ==> " + message);
         try {
-            dbMessages.executeUpdate ("Insert INTO Messages " + "VALUES ('" + myUsername + "','" + receiver + "','" + message + "')");
+            dbMessages.executeUpdate("Insert INTO Messages " + "VALUES ('" + myUsername + "','" + receiver + "','" + message + "')");
         } catch (SQLException ex) {
             setMessage(ex.getMessage());
         }
@@ -272,7 +254,7 @@ public class SocketThread extends Thread {
         }
 
         //notifico gli altri utenti il mio log in
-        String outMsg = "online " + myUsername ;
+        String outMsg = "online " + myUsername;
         for (SocketThread socket : socketList) {
             if (!myUsername.equals(socket.getMyUsername())) {
                 socket.send(outMsg);
@@ -282,7 +264,7 @@ public class SocketThread extends Thread {
 
     private void send(String msg) throws IOException {
         if (myUsername != null) {
-            try { 
+            try {
                 pw.println(msg);
             } catch (Exception ex) {
                 setMessage(ex.getMessage());

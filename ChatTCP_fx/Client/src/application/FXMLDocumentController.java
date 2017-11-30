@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -121,45 +122,6 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    @FXML
-    public void writeChat() {
-        StringTokenizer st = client.getChat();
-        if (st != null) { //there are messages to write
-            containerMessaggi.getChildren().clear();
-            String app, username, msg;
-            while (st.hasMoreTokens()) {
-                username = st.nextToken();
-                st.nextToken(); //consume a token
-                msg = "";
-                while (!(app = st.nextToken()).equals("§")) {
-                    msg = msg + app + " ";
-                }
-                if (username.equals(client.getUsername())) { // a message sent
-                    Label labelSender = new Label(username + ": " + msg);
-                    labelSender.setPrefWidth(Double.MAX_VALUE);
-                    labelSender.setTextAlignment(TextAlignment.RIGHT);
-                    labelSender.setFont(Font.font("Calibri", FontPosture.ITALIC, 17));
-                    labelSender.setPadding(new Insets(10, 0, 10, 0));
-                    labelSender.setAlignment(Pos.BASELINE_RIGHT);
-                    labelSender.setTextFill(Color.WHITE);
-                    containerMessaggi.getChildren().add(labelSender);
-                } else { // a message received
-                    Label labelReceiver = new Label(" " + username + ": " + msg);
-                    labelReceiver.setPrefWidth(Double.MAX_VALUE);
-                    labelReceiver.setTextAlignment(TextAlignment.LEFT);
-                    labelReceiver.setFont(Font.font("Calibri", FontPosture.ITALIC, 17));
-                    labelReceiver.setPadding(new Insets(10, 0, 10, 0));
-                    labelReceiver.setAlignment(Pos.BASELINE_LEFT);
-                    labelReceiver.setTextFill(Color.RED);
-                    containerMessaggi.getChildren().add(labelReceiver);
-                }
-
-            }
-            scrollPane.setVvalue(1.0); //Autoscroll
-        }
-
-    }
-
     public void sendMessage() throws InterruptedException {
         String msg = message.getText();
         if (msg == null || msg.equals("")) {
@@ -168,9 +130,14 @@ public class FXMLDocumentController implements Initializable {
             String receiver = listaDestinatari.getSelectionModel().getSelectedItem();
             if (receiver != null) {
                 client.sendMessage(receiver, msg);
-                client.requestChat(client.getUsername(), receiver);
-                Thread.sleep(200);
-                writeChat();
+                Label label = new Label(" " + receiver + ": " + msg);
+                label.setPrefWidth(Double.MAX_VALUE);
+                label.setTextAlignment(TextAlignment.RIGHT);
+                label.setFont(Font.font("Calibri", FontPosture.ITALIC, 17));
+                label.setPadding(new Insets(10, 0, 10, 0));
+                label.setAlignment(Pos.BASELINE_RIGHT);
+                label.setTextFill(Color.WHITE);
+                containerMessaggi.getChildren().add(label);
                 message.setText("");
             } else {
                 console.setText("Please select a valid receiver.");
@@ -224,12 +191,12 @@ public class FXMLDocumentController implements Initializable {
     public void getData(String sender, String msg) {
         this.sender = sender;
         this.msg = msg;
-//        Platform.runLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                readMessage();
-//            }
-//        });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                readMessage();
+            }
+        });
     }
 
     @Override
