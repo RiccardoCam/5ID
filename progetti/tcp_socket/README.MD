@@ -1,1 +1,0 @@
-CapitalizeClient and CapitalizeServer updated
