@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="521.0" prefWidth="601.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clientchat.FXMLDocumentController">
+  <children>
+    <TextArea fx:id="area" layoutX="26.0" layoutY="47.0" prefHeight="323.0" prefWidth="355.0" wrapText="true" />
+    <Label layoutX="439.0" layoutY="47.0" prefHeight="36.0" prefWidth="81.0" text="UTENTE:" />
+    <TextField fx:id="areaMess" layoutX="26.0" layoutY="433.0" prefHeight="57.0" prefWidth="355.0" />
+    <Button layoutX="423.0" layoutY="137.0" mnemonicParsing="false" onAction="#b_disconnectActionPerformed" text="DISCONNECT" />
+    <Button layoutX="425.0" layoutY="433.0" mnemonicParsing="false" onAction="#b_sendActionPerformed" prefHeight="57.0" prefWidth="91.0" text="INVIA" />
+    <Label layoutX="417.0" layoutY="183.0" prefWidth="105.0" text="Destinatario" />
+    <TextField fx:id="utenteDest" layoutX="405.0" layoutY="209.0" prefWidth="132.0" />
+    <TextField fx:id="nUt" layoutX="422.0" layoutY="83.0" prefWidth="116.0" />
+    <TextField fx:id="err" layoutX="421.0" layoutY="261.0" prefHeight="57.0" prefWidth="116.0" visible="false" />
+  </children>
+</AnchorPane>

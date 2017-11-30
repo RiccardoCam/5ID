@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="347.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clientchat.SignInController">
+  <children>
+    <Label layoutX="205.0" layoutY="21.0" prefHeight="60.0" prefWidth="174.0" text="Benvenuto">
+      <font>
+        <Font name="System Bold" size="30.0" />
+      </font>
+    </Label>
+    <Label layoutX="107.0" layoutY="98.0" prefHeight="40.0" prefWidth="134.0" text="Nome Utente:">
+      <font>
+        <Font size="19.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="107.0" layoutY="154.0" prefHeight="40.0" prefWidth="134.0" text="Password:" />
+    <TextField fx:id="utente" layoutX="259.0" layoutY="107.0" prefWidth="152.0" />
+    <Button id="conferma" layoutX="98.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#b_Accedi" prefHeight="59.0" prefWidth="152.0" text="Accedi">
+      <font>
+        <Font size="20.0" fx:id="x2" />
+      </font>
+    </Button>
+    <Button id="signUp" font="$x2" layoutX="335.0" layoutY="245.0" mnemonicParsing="false" onMouseClicked="#b_SignUp" prefHeight="59.0" prefWidth="152.0" text="Registra" />
+    <PasswordField fx:id="pass" layoutX="259.0" layoutY="163.0" prefWidth="152.0" />
+    <Label fx:id="Erro" layoutX="20.0" layoutY="304.0" prefHeight="29.0" prefWidth="530.0" text="" />
+  </children>
+</AnchorPane>
