@@ -1,4 +1,4 @@
-﻿/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -139,6 +139,7 @@ public class Distributore implements Runnable {
                     //inizio
                     case 0:
                         if (input.equals("4")) {
+                            out.println("Il totale da pagare è " + prezzo + "€");
                             socket.close();
                         } else {
                             try {
@@ -278,7 +279,6 @@ public class Distributore implements Runnable {
         } catch (IOException ex) {
             Logger.getLogger(Distributore.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-		                            out.println("Il totale da pagare è " + prezzo + "€");
             try {
                 socket.close();
             } catch (IOException ex) {
