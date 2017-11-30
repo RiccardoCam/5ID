@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="521.0" prefWidth="601.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="clientchat.FXMLDocumentController">
+  <children>
+    <TextArea fx:id="area" layoutX="26.0" layoutY="63.0" prefHeight="323.0" prefWidth="355.0" wrapText="true" />
+    <Label layoutX="435.0" layoutY="38.0" prefHeight="36.0" prefWidth="81.0" text="UTENTE:" textFill="BLACK">
+      <font>
+        <Font size="20.0" fx:id="x1" />
+      </font>
+    </Label>
+    <TextField fx:id="areaMess" layoutX="26.0" layoutY="433.0" prefHeight="57.0" prefWidth="355.0" />
+    <Button layoutX="429.0" layoutY="156.0" mnemonicParsing="false" onAction="#b_disconnectActionPerformed" prefHeight="42.0" prefWidth="103.0" text="DISCONNECT" textFill="RED" />
+    <Button font="$x1" layoutX="425.0" layoutY="433.0" mnemonicParsing="false" onAction="#b_sendActionPerformed" prefHeight="57.0" prefWidth="116.0" text="INVIA" textFill="BLACK" wrapText="false" />
+    <TextField fx:id="nUt" layoutX="422.0" layoutY="83.0" prefHeight="36.0" prefWidth="116.0" />
+    <Label fx:id="err" layoutX="418.0" layoutY="271.0" prefHeight="52.0" prefWidth="125.0" text="" />
+  </children>
+</AnchorPane>
