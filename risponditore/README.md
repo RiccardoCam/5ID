@@ -15,7 +15,7 @@ IL FILE RisponditoreClient contiene il codice necessario a far avviare il client
 
 Problema riscontrato con le stringhe, non viene visualizzato il prezzo totale man mano che aumenta
 
-![alt text](https://github.com/zuccante/5ID/edit/martorel.devid/risponditore/Classi Grafo.jpg)
+![alt text](https://github.com/zuccante/5ID/edit/martorel.devid/risponditore/ClassiGrafo.jpg)
 
 
 ![alt text](https://github.com/zuccante/5ID/edit/martorel.devid/risponditore/Grafo.jpg)
