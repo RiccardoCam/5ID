@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chattcp;
+package Client.grafica;
 
+import Client.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,21 +35,23 @@ public class ChatController implements Initializable {
     private Button closeButton;
     @FXML
     private TextField daInviare;
-    //ScrollPane non utilizzata
     @FXML
     private ScrollPane chat;
     @FXML
     private TextArea txtArea;
 
-    private void println(String message) {
-        Client.out.println(message);
+    private void invia(String message) {
+        Client.client.invia(message);
+    }
 
+    private String leggi() {
+        return Client.client.leggi();
     }
 
     @FXML
     public void quit() throws InterruptedException, IOException {
-        println("finito");
-        println("Elimina");
+        this.invia("finito");
+        this.invia("Elimina");
         t.interrupt();
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
@@ -57,19 +60,15 @@ public class ChatController implements Initializable {
 
     public void invio() {
         txtArea.appendText("ME:\n" + daInviare.getText() + "\n\n");
-        
-        println(daInviare.getText());
+
+        invia(daInviare.getText());
         daInviare.setText("");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            String dest = Client.in.readLine();
-            this.nickname.setText(dest);
-        } catch (IOException ex) {
-            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String dest = this.leggi();
+        this.nickname.setText(dest);
 
         t = new Thread(() -> {
             while (true) {
@@ -79,15 +78,10 @@ public class ChatController implements Initializable {
                         invio();
                     }
                 });
-                try {
-                    String mexDest = Client.in.readLine();
-                    if (!mexDest.isEmpty()) {
+                String mexDest = this.leggi();
+                if (!mexDest.isEmpty()) {
 
-                        txtArea.appendText(mexDest + "\n");
-                    }
-
-                } catch (IOException ex) {
-                    Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+                    txtArea.appendText(mexDest + "\n");
                 }
             }
         });
@@ -96,4 +90,3 @@ public class ChatController implements Initializable {
 
     }
 }
-             

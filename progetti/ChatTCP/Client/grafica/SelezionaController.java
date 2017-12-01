@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chattcp;
+package Client.grafica;
 
+import Client.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,20 +37,23 @@ public class SelezionaController implements Initializable {
 
     @FXML
     public void quit() throws InterruptedException, IOException {
-        println("Elimina");
+        this.invia("Elimina");
 
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
 
     }
 
-    private void println(String message) {
-        Client.out.println(message);
+    private void invia(String message) {
+        Client.client.invia(message);
+    }
 
+    private String leggi() {
+        return Client.client.leggi();
     }
 
     public void seleziona() throws IOException {
-        println("vogliomessaggiare");
+        this.invia("vogliomessaggiare");
         System.out.println("Premuto Conferma");
         String mioNickname = this.nickname.getText();
         String destNickname = this.disponibili.getValue().toString();
@@ -57,8 +61,8 @@ public class SelezionaController implements Initializable {
         System.out.println("mio nick: " + mioNickname);
         System.out.println("nick da contattare: " + destNickname);
         //--
-        println(mioNickname);
-        println(destNickname);
+        this.invia(mioNickname);
+        this.invia(destNickname);
         Client.root = FXMLLoader.load(getClass().getResource("Chat.fxml"));
         Client.scene = new Scene(Client.root);
         Client.s.setScene(Client.scene);
@@ -66,13 +70,13 @@ public class SelezionaController implements Initializable {
     }
 
     public void aggiorna() throws IOException {
-        println("Aggiorna");
+        this.invia("Aggiorna");
         System.out.println("Premuto Aggiorna");
-        String input = Client.in.readLine();
+        String input = this.leggi();
         if (input.equals("go")) {
             while (true) {
-                if (!Client.in.readLine().equals("finito")) {
-                    String insert = Client.in.readLine();
+                if (!this.leggi().equals("finito")) {
+                    String insert = this.leggi();
                     if (!insert.isEmpty()) {
                         System.out.println("il nome che ti sta passando è: " + insert);
                         ObservableList a = disponibili.getItems();
@@ -95,11 +99,7 @@ public class SelezionaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         disponibili.setVisibleRowCount(5);
-        try {
-            nickname.setText(Client.in.readLine());
-        } catch (IOException ex) {
-            Logger.getLogger(SelezionaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        nickname.setText(this.leggi());
 
     }
 

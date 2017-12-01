@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chattcp;
+package Client.grafica;
 
+import Client.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,16 +30,20 @@ public class SignInController implements Initializable {
     @FXML
     private Button closeButton;
     @FXML
-    public TextField username, password;
+    private TextField username, password;
 
-    private void println(String message) {
-        Client.out.println(message);
+    private void invia(String message) {
+        
+        Client.client.invia(message);
 
+    }
+    private String leggi(){
+        return Client.client.leggi();
     }
 
     @FXML
     public void quit() {
-        println("hopremutosignin");
+        this.invia("hopremutosignin");
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
@@ -46,11 +51,11 @@ public class SignInController implements Initializable {
     @FXML
     public void signIn() throws IOException {
         System.out.println("Premuto SignIn");
-        println("signIn");
-        println(username.getText());
-        println(password.getText());
+        this.invia("signIn");
+        this.invia(username.getText());
+        this.invia(password.getText());
         while (true) {
-            String input = Client.in.readLine();
+            String input = this.leggi();
             if (input.equals("go")) {
                 Client.root = FXMLLoader.load(getClass().getResource("Seleziona.fxml"));
                 Client.scene = new Scene(Client.root);
@@ -78,7 +83,7 @@ public class SignInController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
     }
 
 }

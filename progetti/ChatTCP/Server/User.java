@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chattcp;
+package server;
 
-import chattcp.Server.Task;
+import server.Server.Task;
 
 /**
  *
@@ -13,9 +13,9 @@ import chattcp.Server.Task;
  */
 public class User {
 
-    private Task t;
-    private String username;
-    private boolean disponibile;
+    protected Task t;
+    protected String username;
+    protected boolean disponibile;
 
     public User(Task t) {
         this.username = "";

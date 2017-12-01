@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chattcp;
+package Client.grafica;
 
+import Client.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,9 +32,11 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField username, password1, password2;
 
-    private void println(String message) {
-        Client.out.println(message);
-
+    private void invia(String message) {
+        Client.client.invia(message);
+    }
+    private String leggi(){
+        return Client.client.leggi();
     }
 
     @FXML
@@ -53,15 +56,15 @@ public class SignUpController implements Initializable {
 
     public void signUp() throws IOException {
         if (!password1.getText().isEmpty() && !password2.getText().isEmpty() && !username.getText().isEmpty()) {
-            Client.out.println("confermaregistrazione");
-            Client.out.println(username.getText());
+            this.invia("confermaregistrazione");
+            this.invia(username.getText());
             while (true) {
-                String input = Client.in.readLine();
+                String input = this.leggi();
                 if (input.equals("go")) {
                     if (password1.getText().equals(password2.getText())) {
-                        Client.out.println("invioregistrazione");
-                        Client.out.println(username.getText());
-                        Client.out.println(password1.getText());
+                        this.invia("invioregistrazione");
+                        this.invia(username.getText());
+                        this.invia(password1.getText());
                         Client.root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
                         Client.scene = new Scene(Client.root);
                         Client.s.setScene(Client.scene);

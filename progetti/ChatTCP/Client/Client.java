@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chattcp;
+package Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,9 +12,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -23,16 +20,17 @@ import javafx.stage.Stage;
  *
  * @author Sandro
  */
-public class Client extends Application {
+public class Client {
 
-    static Socket socket;
-    static PrintWriter out;
-    static BufferedReader in;
+    private static Socket socket;
+    private static PrintWriter out;
+    private static BufferedReader in;
     public static Parent root;
     public static Scene scene;
     public static Stage s;
+    public static Client client = new Client();
 
-    public void ConnectToClient() {
+    public Client() {
         try {
             String serverAddress = "localhost";
             socket = new Socket(serverAddress, 9898);
@@ -41,26 +39,14 @@ public class Client extends Application {
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        s = stage;
-        root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
-
-        scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
 
     }
-     public void invia(String messaggio){
+
+    public void invia(String messaggio) {
         out.println(messaggio);
-        out.flush();
     }
 
-    public String ricevi(){
+    public String leggi() {
         try {
             return in.readLine();
         } catch (IOException e) {
@@ -69,16 +55,8 @@ public class Client extends Application {
         return "";
     }
 
-
-
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws IOException {
-        Client c = new Client();
-        c.ConnectToClient();
-        launch(args);
-    }
-
 }

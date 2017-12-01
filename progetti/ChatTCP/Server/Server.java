@@ -1,15 +1,12 @@
-package chattcp;
+package server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,45 +16,8 @@ import java.util.logging.Logger;
  */
 public class Server {
 
-    private static ArrayList<User> users = new ArrayList<>();
+    protected static ArrayList<User> users = new ArrayList<>();
 
-    /**
-     * @param args the command line arguments
-     * @throws java.io.IOException
-     */
-    public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
-
-        System.out.println("Server running..");
-        ServerSocket listener = new ServerSocket(9898);
-        ThreadPoolExecutor ex = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-        try {
-            while (true) {
-                Task t = new Task(listener.accept());
-                User u = new User(t);
-                users.add(u);
-                int pos = users.indexOf(u);
-                t.setPos(pos);
-                System.out.println("la posizione del thread è: " + pos);
-
-                ex.execute(t);
-
-                System.out.println("Clienti on: " + ex.getPoolSize());
-                System.out.println(users);
-            }
-        } finally {
-            listener.close();
-        }
-
-    }
-//---------metodo mai utilizzato
-
-    private static String[] getAllUsers() {
-        String[] u = new String[users.size()];
-        for (int i = 0; i < users.size(); i++) {
-            u[i] = users.get(i).getUsername();
-        }
-        return u;
-    }
 
     private static int getPos(String nick) {
         for (int i = 0; i < users.size(); i++) {
@@ -80,7 +40,6 @@ public class Server {
     private static User getUser(String nick) {
         return users.get(getPos(nick));
     }
-
     /**
      *
      */
